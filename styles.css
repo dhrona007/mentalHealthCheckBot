@@ -1,0 +1,236 @@
+h1,
+h2,
+h3,
+h5 {
+  margin-bottom: 10px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  /* background-image: url("https://static.vecteezy.com/system/resources/previews/025/446/274/large_2x/mental-health-happiness-creative-abstract-concept-colorful-illustration-of-male-head-paint-splatter-style-mindfulness-positive-thinking-self-care-idea-banner-white-background-generative-ai-photo.jpg"); */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    /* Adjust the opacity here */
+    url("https://static.vecteezy.com/system/resources/previews/025/446/274/large_2x/mental-health-happiness-creative-abstract-concept-colorful-illustration-of-male-head-paint-splatter-style-mindfulness-positive-thinking-self-care-idea-banner-white-background-generative-ai-photo.jpg") no-repeat center center;
+  background-color: rgba(255, 255, 255);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #333;
+  margin: 0;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  line-height: 1.6;
+  opacity: 0.8;
+  color : black;
+}
+
+.mainContent {
+  color: black;
+  background-color: rgba(255, 0, 0);
+  margin : auto;
+  display : flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  opacity : 1;
+}
+
+#core-objectives,
+#future-goals,
+#aboutUs {
+  /* background : transparent; */
+  opacity: 0.;
+  color: black;
+}
+
+
+/* Container Styling */
+.container {
+  background: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  text-align: center;
+
+}
+
+/* Chat Input Styling */
+#chat-input {
+  width: calc(100% - 90px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+
+}
+
+/* Send Button */
+#send-btn {
+  padding: 10px 20px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.mood-buttons button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mood-buttons button:hover {
+  background: transparent;
+  color: #007bff;
+  border: solid;
+  border-color: #007bff;
+}
+
+.mood-buttons {
+  margin-bottom: 20px;
+}
+
+section {
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 900px;
+  /* Keeps content centered */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  background-color: rgba(255, 255, 255, 0.);
+}
+
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 12px;
+}
+
+#send-btn:hover {
+  background: #218838;
+}
+
+/* Emergency Button */
+#emergency-btn {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#emergency-btn:hover {
+  background: #c82333;
+}
+
+/* Remove duplicate selectors */
+#future-goals,
+#core-objectives {
+  margin-top: 20px;
+}
+
+.aboutus {
+  margin-bottom: 100px;
+  max-height: 350px;
+}
+
+
+/* .overlay {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust color and opacity
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}  */
+
+/* .container {
+    background: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width : 500px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .chat-window {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background: #f9f9f9;
+  }
+  
+  #chat-messages {
+    text-align: left;
+  }
+  
+  #chat-input {
+    width: calc(100% - 90px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  #send-btn {
+    padding: 10px 20px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    margin : 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #send-btn:hover {
+    background: #218838;
+  }
+  
+  #emergency-btn {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #emergency-btn:hover {
+    background: #c82333;
+  }
+
+
+  /* .aboutUs {
+    height : 100vh;
+  } */
+/* background-image : url("https://clearforkacademy.com/wp-content/uploads/2023/10/7768446-1024x683.jpg"); */
+
+/* #future-goals, #core-objectives,#core-objectives {
+    height : 100vh;
+    margin-top : 20px;
+  } */
+*/
