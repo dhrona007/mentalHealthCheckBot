@@ -1,18 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from transformers import pipeline
-from flask import Flask, send_from_directory
 
 app = Flask(__name__, static_folder='static')
-
-@app.route('/')
-def index():
-    return send_from_directory('static', 'index.html')
-
-@app.route('/<path:path>')
-def static_files(path):
-    return send_from_directory('static', path)
-
-app = Flask(__name__)
 
 # Load a local sentiment analysis model
 sentiment_analyzer = pipeline("sentiment-analysis")
@@ -33,13 +22,13 @@ def analyze_responses(responses):
     prompt = "The user has provided the following responses to mental health questions:\n"
     for i, response in enumerate(responses):
         prompt += f"Q: {QUESTIONS[i]}\nA: {response}\n\n"
-    
+
     # Analyze the sentiment of the combined responses
     try:
         result = sentiment_analyzer(prompt)[0]
         sentiment = result['label']
         score = result['score']
-        
+
         # Provide a basic analysis based on sentiment
         if sentiment == "NEGATIVE" and score > 0.8:
             analysis = (
@@ -65,13 +54,20 @@ def analyze_responses(responses):
 def chat():
     data = request.json
     user_message = data.get('message', '')
-    
+
     # For simplicity, we'll just analyze the user's message
-    # In a real scenario, you might want to maintain a conversation context
     responses = [user_message]
     analysis = analyze_responses(responses)
-    
+
     return jsonify({'reply': analysis})
+
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('static', path)
 
 if __name__ == '__main__':
     app.run(debug=True)

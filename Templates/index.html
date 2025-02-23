@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="mb-5 pb-5">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <a class="navbar-brand" href="#Home">MentaLyze</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse p-2" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link active" href="#Home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#core-objectives">Aim</a>
+                    <a class="nav-item nav-link" href="#future-goals">Future goals</a>
+                    <a class="nav-item nav-link" href="#aboutUs">About Us</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="Home">
+            <div class="text-center mainContent">
+                <h1>Welcome to MentaLyze!</h1>
+                <p><i>Mentalyze this is a mental health chatbot provides the report about emotional standing</i></p>
+            </div>
+            <section class="container">
+                <!-- Chat Window -->
+                <div class="chat-sectionindow p-5">
+                    <label for="chat-input" class="text-dark text-left mb-3">How are you feeling today?</label>
+                    <!-- Mood Tracking Buttons -->
+                    <div class="mood-buttons d-none">
+                        <button id="happy-btn" class="btn btn-outline-primary">😊 Happy</button>
+                        <button id="sad-btn">😢 Sad</button>
+                        <button id="anxious-btn">😰 Anxious</button>
+                    </div>
+                    <div id="chat-messages" class="text-left pb-1 text-black ml-5"></div>
+                    <input type="text" type="text" id="chat-input" class="mt-4" autocomplete="off"
+                        placeholder="Enter about your symptoms...">
+                    <div class="d-flex flex-row justify-content-center">
+                        <button id="send-btn" type="sumbit" value="Submit" class="btn btn-success">Send</button>
+                        <!-- Emergency Alert Button -->
+                        <button id="emergency-btn" class="btn btn-danger">🚨 Emergency Alert</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="m-3">
+            <section id="core-objectives" class="objectives p-3 mt-5">
+                <h2 class="">Objectives</h2>
+                <ul>
+                    <li><strong>Accessible Mental Health Support</strong> – Make mental health assistance available 24/7
+                        through AI-powered conversations.</li>
+                    <li><strong>Emotion Detection & Personalized Guidance</strong> – Use voice & text-based emotion
+                        analysis
+                        to provide tailored coping strategies.</li>
+                    <li><strong>Proactive Well-being Tracking</strong> – Help users monitor their mental health trends
+                        and
+                        suggest preventative care.</li>
+                    <li><strong>Emergency Intervention</strong> – Identify signs of distress and provide real-time
+                        crisis
+                        support or connect users with professionals.</li>
+                    <li><strong>Multi-Platform Availability</strong> – Enable access via web, mobile apps, and popular
+                        messaging platforms (WhatsApp, Telegram).</li>
+                </ul>
+            </section>
+
+            <section id="future-goals" class="mt-5 p-3">
+                <h2>Future Goals</h2>
+                <h5>1️⃣ AI-Powered Speech & Emotion Analysis</h5>
+                <ul>
+                    <li><strong>Voice-Based Interaction:</strong> Users will be able to speak instead of typing using
+                        speech-to-text technology (Whisper AI, Web Speech API).</li>
+                    <li><strong>Emotion Detection from Voice:</strong> Advanced AI models will analyze voice tone,
+                        pitch,
+                        and
+                        speed to detect emotions like stress, sadness, or anxiety.</li>
+                    <li><strong>Soothing AI-Generated Audio Responses:</strong> The chatbot will convert text into
+                        calming
+                        voice
+                        responses using Google TTS, ElevenLabs, or AWS Polly.</li>
+                </ul>
+
+                <h5>2️⃣ Personalized Mental Health Reports</h5>
+                <ul>
+                    <li><strong>Mood Tracking History:</strong> Users will get weekly/monthly reports on their mood
+                        trends,
+                        stored in a secure database.</li>
+                    <li><strong>AI-Powered Insights & Advice:</strong> The bot will provide personalized coping
+                        strategies,
+                        breathing exercises, and wellness tips based on user interactions.</li>
+                    <li><strong>Wearable Device Integration:</strong> Future versions will connect with Apple Watch,
+                        Fitbit,
+                        or
+                        Oura Ring to analyze heart rate, stress levels, and sleep patterns and offer tailored
+                        recommendations.
+                    </li>
+                </ul>
+
+                <h5>3️⃣ AI-Powered Therapy & Intervention</h5>
+                <ul>
+                    <li><strong>Virtual Therapy Sessions:</strong> Users will be able to schedule AI-guided therapy
+                        sessions
+                        based on Cognitive Behavioral Therapy (CBT) techniques.</li>
+                    <li><strong>Sentiment-Based AI Responses:</strong> The chatbot will use fine-tuned AI models to
+                        provide
+                        empathetic and context-aware responses.</li>
+                    <li><strong>Meditation & Relaxation Features:</strong> Integration with YouTube API and guided
+                        breathing
+                        exercises to help users relax and manage stress effectively.</li>
+                </ul>
+
+                <h5>4️⃣ Multi-Platform & Multimodal Expansion</h5>
+                <ul>
+                    <li><strong>Mobile App Launch:</strong> A dedicated React Native/Flutter mobile app for Android &
+                        iOS.
+                    </li>
+                    <li><strong>Chatbot Integration:</strong> Available on WhatsApp, Telegram, and Discord for on-the-go
+                        mental
+                        health support.</li>
+                    <li><strong>Multilingual Support:</strong> AI-powered translations will allow users to communicate
+                        in
+                        their
+                        native languages.</li>
+                    <li><strong>Anonymous Mental Health Community:</strong> A forum/chatroom where users can discuss
+                        mental
+                        health topics anonymously.</li>
+                </ul>
+
+                <h5>5️⃣ Emergency & Crisis Support</h5>
+                <ul>
+                    <li><strong>Automated SOS Feature:</strong> The chatbot will detect distress signals and contact
+                        emergency
+                        contacts or helplines with user consent.</li>
+                    <li><strong>Mental Health Helpline Integration:</strong> Direct real-time chat with professionals
+                        via
+                        API
+                        integrations (e.g., Twilio, BetterHelp).</li>
+                    <li><strong>Location-Based Help:</strong> Users will be able to find nearby therapists and crisis
+                        centers
+                        for immediate support.</li>
+                </ul>
+            </section>
+
+            <section class="aboutus text-left mt-5 p-3" id="aboutUs">
+                <h1 class=>About us</h1>
+                <Div>
+                    <p>A team of 3 students studying B.tech under Aritifical Intelligence background in Sreenidhi
+                        Institue
+                        of
+                        Science & Technology</p>
+                    <p>
+                        <b>Contributors :</b> V Dhrona Chandra, G Thrigun Chandra, E Nithin Kumar
+                    </p>
+                </Div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
