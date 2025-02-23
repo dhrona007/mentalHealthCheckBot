@@ -1,5 +1,16 @@
 from flask import Flask, request, jsonify
 from transformers import pipeline
+from flask import Flask, send_from_directory
+
+app = Flask(__name__, static_folder='static')
+
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('static', path)
 
 app = Flask(__name__)
 
@@ -24,26 +35,30 @@ def analyze_responses(responses):
         prompt += f"Q: {QUESTIONS[i]}\nA: {response}\n\n"
     
     # Analyze the sentiment of the combined responses
-    result = sentiment_analyzer(prompt)[0]
-    sentiment = result['label']
-    score = result['score']
-    
-    # Provide a basic analysis based on sentiment
-    if sentiment == "NEGATIVE" and score > 0.8:
-        analysis = (
-            "Based on your responses, it seems like you're experiencing significant distress. "
-            "Please consider reaching out to a mental health professional for support."
-        )
-    elif sentiment == "NEGATIVE":
-        analysis = (
-            "Your responses suggest you're feeling down or stressed. "
-            "Try mindfulness exercises or journaling to help manage your feelings."
-        )
-    else:
-        analysis = (
-            "Your responses seem positive. Keep practicing self-care and reach out if you need support."
-        )
-    
+    try:
+        result = sentiment_analyzer(prompt)[0]
+        sentiment = result['label']
+        score = result['score']
+        
+        # Provide a basic analysis based on sentiment
+        if sentiment == "NEGATIVE" and score > 0.8:
+            analysis = (
+                "Based on your responses, it seems like you're experiencing significant distress. "
+                "Please consider reaching out to a mental health professional for support."
+            )
+        elif sentiment == "NEGATIVE":
+            analysis = (
+                "Your responses suggest you're feeling down or stressed. "
+                "Try mindfulness exercises or journaling to help manage your feelings."
+            )
+        else:
+            analysis = (
+                "Your responses seem positive. Keep practicing self-care and reach out if you need support."
+            )
+    except Exception as e:
+        print(f"Error analyzing sentiment: {e}")
+        analysis = "Sorry, something went wrong while analyzing your response. Please try again."
+
     return analysis
 
 @app.route('/api/chat', methods=['POST'])
