@@ -1,193 +1,110 @@
-:root {
-  --navbar-height: 80px;
-  --primary-color: #007bff;
-  --success-color: #28a745;
-  --danger-color: #dc3545;
-  --text-color: #333;
-  --white: #fff;
-  --black: #000;
-  --background-opacity: 0.7;
+// DOM Elements
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+const emergencyBtn = document.getElementById('emergency-btn');
+const moodButtons = {
+  happy: document.getElementById('happy-btn'),
+  sad: document.getElementById('sad-btn'),
+  anxious: document.getElementById('anxious-btn'),
+};
+
+// Function to add a message to the chat window
+function addMessage(role, message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', role);
+  messageElement.innerHTML = `<strong>${role}:</strong> ${message}`;
+  chatMessages.appendChild(messageElement);
+  chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to bottom
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, var(--background-opacity))),
-    url("https://static.vecteezy.com/system/resources/previews/025/446/274/large_2x/mental-health-happiness-creative-abstract-concept-colorful-illustration-of-male-head-paint-splatter-style-mindfulness-positive-thinking-self-care-idea-banner-white-background-generative-ai-photo.jpg") no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  color: var(--text-color);
-  margin: 0;
-  padding: 10px;
-  line-height: 1.6;
-  opacity : 0.82;
-  scrollbar-width: thin;
-  scrollbar-color: #fcfcfc transparent;
-  background-color: transparent;
-  
+// Function to send a message to the backend (OpenAI request via backend)
+async function sendMessage(message) {
+  if (!message) return;
+  addMessage('You', message);
+
+  try {
+    const response = await fetch('/api/chat', { // ✅ Call backend instead of OpenAI API directly
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) throw new Error('Failed to fetch response');
+    
+    const data = await response.json();
+    addMessage('Bot', data.reply);
+  } catch (error) {
+    console.error('Error sending message:', error);
+    addMessage('Bot', 'Sorry, something went wrong. Please try again.');
+  }
 }
 
-.navbar {
-  padding-bottom  : 60px;
-}
-/* Navbar spacing for sections */
-#Home,
-#core-objectives,
-#future-goals,
-#aboutUs {
-  padding-top: var(--navbar-height);
-  scroll-margin-top: var(--navbar-height);
-
+// Function to track mood
+function trackMood(mood) {
+  addMessage('Bot', `You're feeling ${mood}. Let me know if you want to talk.`);
+  sendMessage(`I'm feeling ${mood}. Can you help me?`);
 }
 
-#aboutUs {
-  min-height : 200px;
-}
-.chat-sectionindow {
-  background-color: rgba(7, 5, 0, 0.718);
-  border-radius: 10px;
+// Function to send emergency alert
+function sendEmergencyAlert() {
+  alert('Emergency alert triggered! Please contact a trusted person or helpline.');
 }
 
-.mainContent {
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin: auto;
-  max-width: 800px;
-  opacity: 1;
-  z-index: 1;
-}
+// Event Listeners
+sendBtn.addEventListener('click', () => {
+  const message = chatInput.value.trim();
+  sendMessage(message);
+  chatInput.value = '';
+});
 
-.mainContent h1 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-}
+chatInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendMessage(chatInput.value.trim());
+    chatInput.value = '';
+  }
+});
 
-.mainContent p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
+// Smooth scrolling for navbar links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default anchor behavior
 
-.mainContent .btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+      const targetId = this.getAttribute('href'); // Get the target section ID
+      const targetSection = document.querySelector(targetId); // Find the target section
 
-.mainContent .btn:hover {
-  background-color: #0056b3;
-}
+      if (targetSection) {
+          const targetPosition = targetSection.offsetTop; // Get the position of the target section
+          const startPosition = window.pageYOffset; // Current scroll position
+          const distance = targetPosition - startPosition - 100; // Distance to scroll
+          const duration = 1000; // Duration of the scroll animation in milliseconds
+          let startTime = null;
 
-.container {
-  background: transparent;
-  padding: 20px;
-  padding-bottom : 10px;
-  border-radius: 10px;
-  width: 500px;
-  text-align: center;
-  align-items: center;
-  height : auto;
-}
+          function animation(currentTime) {
+              if (startTime === null) startTime = currentTime;
+              const timeElapsed = currentTime - startTime;
+              const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+              window.scrollTo(0, run);
+              if (timeElapsed < duration) requestAnimationFrame(animation);
+          }
 
-.chat-sectionindow {
-  /* background-color: rgba(7, 5, 0, 0.718); */
-  background-color: rgba(255, 255, 255, 0.718);
-  border-radius: 10px;
+          // Easing function for smooth scrolling
+          function easeInOutQuad(t, b, c, d) {
+              t /= d / 2;
+              if (t < 1) return c / 2 * t * t + b;
+              t--;
+              return -c / 2 * (t * (t - 2) - 1) + b;
+          }
 
- /* Add margin to push content below */
-  max-height: 600px; /* Minimum height to ensure it doesn't collapse */
-  z-index: 1; /* Ensure it doesn't overlap other content */
-}
+          requestAnimationFrame(animation);
+      }
+  });
+});
 
-#chat-messages {
-  /* color: var(--black); */
-  max-height: 200px; /* Limit the height of the chat messages area */
-  overflow-y: auto; /* Add scroll if messages exceed the height */
-  margin-bottom: 5px; /* Add space below the chat messages */
-  scrollbar-width: thin;
-  scrollbar-color: #888 transparent;
-}
+moodButtons.happy.addEventListener('click', () => trackMood('Happy'));
+moodButtons.sad.addEventListener('click', () => trackMood('Sad'));
+moodButtons.anxious.addEventListener('click', () => trackMood('Anxious'));
 
-#chat-messages::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-}
-
-#chat-messages::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the scrollbar thumb */
-  border-radius: 4px; /* Rounded corners for the thumb */
-}
-
-#chat-messages::-webkit-scrollbar-track {
-  background-color: transparent; /* Transparent track */
-}
-
-#chat-input {
-  width: calc(100% - 90px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-#send-btn,
-#emergency-btn {
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  min-width: 100px;
-  max-width: 170px;
-  max-height: 60px;
-  margin: 10px;
-  margin-top : 20px;
-}
-
-#send-btn {
-  background-color: var(--success-color);
-  color: var(--white);
-}
-
-#emergency-btn {
-  background-color: var(--danger-color);
-  color: var(--white);
-}
-
-#send-btn:hover {
-  background-color: #218838;
-}
-
-#emergency-btn:hover {
-  background-color: #c82333;
-}
-
-.mood-buttons button {
-  background-color: var(--primary-color);
-  color: var(--white);
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.mood-buttons button:hover {
-  background-color: #0056b3;
-}
-
-section {
-  margin: 40px auto;
-  padding: 30px;
-  max-width: 900px;
-  background: var(--white);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: var(--text-color);
-}
-
-.aboutus {
-  margin-bottom: 100px;
-  max-height: 350px;
-}
+emergencyBtn.addEventListener('click', sendEmergencyAlert);
