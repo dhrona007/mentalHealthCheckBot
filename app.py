@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from transformers import pipeline
 
 app = Flask(__name__, static_folder='static')
@@ -16,6 +16,9 @@ QUESTIONS = [
     "Do you have thoughts of self-harm or suicide?",
 ]
 
+# Store user responses
+user_responses = []
+
 # Function to analyze the user's responses using a local model
 def analyze_responses(responses):
     # Combine all responses into a single prompt
@@ -25,7 +28,9 @@ def analyze_responses(responses):
 
     # Analyze the sentiment of the combined responses
     try:
+        print(f"Analyzing prompt: {prompt}")  # Debugging: Print the prompt being analyzed
         result = sentiment_analyzer(prompt)[0]
+        print(f"Sentiment analysis result: {result}")  # Debugging: Print the result
         sentiment = result['label']
         score = result['score']
 
@@ -45,25 +50,35 @@ def analyze_responses(responses):
                 "Your responses seem positive. Keep practicing self-care and reach out if you need support."
             )
     except Exception as e:
-        print(f"Error analyzing sentiment: {e}")
+        print(f"Error analyzing sentiment: {e}")  # Debugging: Print the error
         analysis = "Sorry, something went wrong while analyzing your response. Please try again."
 
     return analysis
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
+    global user_responses  # Use the global list to store responses
+
     data = request.json
     user_message = data.get('message', '')
 
-    # For simplicity, we'll just analyze the user's message
-    responses = [user_message]
-    analysis = analyze_responses(responses)
+    # Add the user's response to the list
+    user_responses.append(user_message)
 
-    return jsonify({'reply': analysis})
+    # Check if all questions have been answered
+    if len(user_responses) < len(QUESTIONS):
+        # Ask the next question
+        next_question = QUESTIONS[len(user_responses)]
+        return jsonify({'reply': next_question, 'status': 'question'})
+    else:
+        # Analyze all responses and provide feedback
+        analysis = analyze_responses(user_responses)
+        user_responses = []  # Reset responses for the next session
+        return jsonify({'reply': analysis, 'status': 'analysis'})
 
 @app.route('/')
 def index():
-    return send_from_directory('static', 'index.html')
+    return render_template('index.html')  # Serve index.html from the templates folder
 
 @app.route('/<path:path>')
 def static_files(path):
