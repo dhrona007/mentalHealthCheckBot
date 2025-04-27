@@ -1,0 +1,275 @@
+[
+  {
+    "question": "Little interest or pleasure in doing things?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Feeling down, depressed, or hopeless?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Trouble falling/staying asleep or sleeping too much?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Feeling tired or having little energy?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Poor appetite or overeating?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Feeling bad about yourself or that you’re a failure?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Trouble concentrating on things (e.g., reading or TV)?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Moving/speaking so slowly that others notice? Or the opposite?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Thoughts that you’d be better off dead or hurting yourself?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Feeling nervous, anxious, or on edge?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Not being able to stop or control worrying?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Worrying too much about different things?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Trouble relaxing?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Being so restless that it’s hard to sit still?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Becoming easily annoyed or irritable?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Feeling afraid as if something awful might happen?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Have you wished you were dead or wished you could go to sleep and not wake up?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Have you had thoughts of killing yourself?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Have you thought about how you might kill yourself?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Have you started to work out or worked out the details of how to kill yourself?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Have you ever done anything, started to do anything, or prepared to do anything to end your life?",
+    "options": [
+      "Not at all",
+      "Several days",
+      "More than half the days",
+      "Nearly every day"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Can you repeat these three words: apple, table, penny?",
+    "options": ["Yes", "No"],
+    "allow_text": false
+  },
+  {
+    "question": "What is today’s date?",
+    "options": ["Open-ended"],
+    "allow_text": true
+  },
+  {
+    "question": "Where are we right now (city/state)?",
+    "options": ["Open-ended"],
+    "allow_text": true
+  },
+  {
+    "question": "Have you had stomach pain, back pain, or headaches?",
+    "options": ["Yes", "No"],
+    "allow_text": false
+  },
+  {
+    "question": "Have you felt dizzy, faint, or had trouble breathing?",
+    "options": ["Yes", "No"],
+    "allow_text": false
+  },
+  {
+    "question": "Have you experienced nausea, gas, or indigestion?",
+    "options": ["Yes", "No"],
+    "allow_text": false
+  },
+  {
+    "question": "Do you feel more energetic/active than usual?",
+    "options": [
+      "Not at all",
+      "A little",
+      "Moderately",
+      "Very much",
+      "Extremely"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Are you talking more or feeling pressured to keep talking?",
+    "options": [
+      "Not at all",
+      "A little",
+      "Moderately",
+      "Very much",
+      "Extremely"
+    ],
+    "allow_text": false
+  },
+  {
+    "question": "Do you feel like your thoughts are racing?",
+    "options": [
+      "Not at all",
+      "A little",
+      "Moderately",
+      "Very much",
+      "Extremely"
+    ],
+    "allow_text": false
+  }
+]

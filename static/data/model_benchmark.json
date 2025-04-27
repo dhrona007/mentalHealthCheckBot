@@ -1,0 +1,15 @@
+{
+  "models": [
+    {
+      "name": "Mistral-7B-Instruct",
+      "average_response_time_ms": 700,
+      "description": "High-quality responses with 35% faster inference compared to other models."
+    },
+    {
+      "name": "Llama 2 13B",
+      "average_response_time_ms": 1080,
+      "description": "Strong performance but slower inference speed."
+    }
+  ],
+  "comparison_note": "Mistral-7B-Instruct offers a 35% improvement in response time over Llama 2 13B, making it the best choice for this project."
+}

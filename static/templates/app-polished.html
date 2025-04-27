@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentalyze - Polished Application</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/polish.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/app-unified.js" type="module"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Mentalyze</h1>
+            <div class="theme-toggle">
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="light-icon">☀️</span>
+                    <span class="dark-icon">🌙</span>
+                </button>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#assessment" class="nav-link">Assessment</a></li>
+                    <li><a href="#chat" class="nav-link">Chat</a></li>
+                    <li><a href="#mood" class="nav-link">Mood Tracker</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="home" class="section">
+                <h2>Welcome to Mentalyze</h2>
+                <p>Your mental health matters. Let's start the journey together.</p>
+                <button id="start-assessment-btn" class="btn-primary">Start Assessment</button>
+            </section>
+            <section id="assessment" class="section">
+                <h2>Mental Health Assessment</h2>
+                <div id="assessment-questions"></div>
+            </section>
+            <section id="chat" class="section">
+                <h2>Chat with AI</h2>
+                <div id="chat-messages"></div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat input">
+                    <button id="send-btn" class="btn-primary">Send</button>
+                </div>
+                <div id="loading-spinner" class="loading-spinner" style="display:none;"></div>
+            </section>
+            <section id="mood" class="section">
+                <h2>Mood Tracker</h2>
+                <div class="mood-buttons">
+                    <button id="happy-btn" class="mood-btn happy">Happy</button>
+                    <button id="sad-btn" class="mood-btn sad">Sad</button>
+                    <button id="anxious-btn" class="mood-btn anxious">Anxious</button>
+                </div>
+                <div class="mood-chart-container">
+                    <canvas id="mood-chart" aria-label="Mood history chart"></canvas>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <button id="feedback-btn" class="btn-secondary">Give Feedback</button>
+            <p>&copy; 2023 Mentalyze. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const toggleBtn = document.getElementById('dark-mode-toggle');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Check for saved preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Feedback button
+        document.getElementById('feedback-btn').addEventListener('click', () => {
+            alert('Thank you for your feedback! We appreciate your input.');
+        });
+    </script>
+</body>
+
+</html>

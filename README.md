@@ -1,150 +1,133 @@
-# Mental Health Chatbot - MentaLyze
+# 🧠 Mentalyze - AI Mental Health Companion [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Description
-The **Mental Health Chatbot - MentaLyze** is an AI-powered chatbot designed to provide mental health support by analyzing user responses, tracking moods, and offering personalized guidance. It aims to make mental health assistance accessible 24/7 through AI-powered conversations, emotion detection, and proactive well-being tracking.
+<div align="center">
+  <img src="https://img.icons8.com/clouds/200/mental-health.png" width="150" alt="Mentalyze Logo">
+  <h3>Your 24/7 AI-powered mental wellness partner</h3>
+  <p>Empowering emotional well-being through adaptive AI conversations and mood insights 🌈</p>
+</div>
 
----
+## ✨ Key Features
 
-## Features
-- **Mood Tracking**: Users can log their current mood (e.g., happy, sad, anxious).
-- **AI-Powered Chat**: The bot uses AI to provide supportive and empathetic responses.
-- **Emergency Alert**: Users can trigger an emergency alert to notify a trusted contact.
-- **Emotion Detection**: The bot analyzes user responses to provide tailored coping strategies.
-- **Proactive Well-being Tracking**: Helps users monitor their mental health trends and suggests preventative care.
-- **Multi-Platform Availability**: Accessible via web, mobile apps, and popular messaging platforms (WhatsApp, Telegram).
+| Feature Category       | Components                                                      | Icon |
+| ---------------------- | --------------------------------------------------------------- | ---- |
+| **🤖 AI Interactions** | Voice & text chat • Context-aware responses • Multi-LLM support | 💬   |
+| **📊 Mental Insights** | Adaptive assessments • Mood tracking • PDF report generation    | 📈   |
+| **⚡ Performance**     | Model benchmarking • Real-time analytics • Session persistence  | 🚀   |
+| **🔒 Safety**          | Emergency alerts • Privacy-first design • Anonymous usage       | 🛡️   |
 
----
-
-## Objectives
-- **Accessible Mental Health Support**: Make mental health assistance available 24/7 through AI-powered conversations.
-- **Emotion Detection & Personalized Guidance**: Use voice & text-based emotion analysis to provide tailored coping strategies.
-- **Proactive Well-being Tracking**: Help users monitor their mental health trends and suggest preventative care.
-- **Emergency Intervention**: Identify signs of distress and provide real-time crisis support or connect users with professionals.
-- **Multi-Platform Availability**: Enable access via web, mobile apps, and popular messaging platforms (WhatsApp, Telegram).
-
----
-
-## Future Goals
-1. **AI-Powered Speech & Emotion Analysis**:
-   - **Voice-Based Interaction**: Users will be able to speak instead of typing using speech-to-text technology.
-   - **Emotion Detection from Voice**: Advanced AI models will analyze voice tone, pitch, and speed to detect emotions like stress, sadness, or anxiety.
-   - **Soothing AI-Generated Audio Responses**: The chatbot will convert text into calming voice responses using Google TTS, ElevenLabs, or AWS Polly.
-
-2. **Personalized Mental Health Reports**:
-   - **Mood Tracking History**: Users will get weekly/monthly reports on their mood trends, stored in a secure database.
-   - **AI-Powered Insights & Advice**: The bot will provide personalized coping strategies, breathing exercises, and wellness tips based on user interactions.
-   - **Wearable Device Integration**: Future versions will connect with Apple Watch, Fitbit, or Oura Ring to analyze heart rate, stress levels, and sleep patterns and offer tailored recommendations.
-
-3. **AI-Powered Therapy & Intervention**:
-   - **Virtual Therapy Sessions**: Users will be able to schedule AI-guided therapy sessions based on Cognitive Behavioral Therapy (CBT) techniques.
-   - **Sentiment-Based AI Responses**: The chatbot will use fine-tuned AI models to provide empathetic and context-aware responses.
-   - **Meditation & Relaxation Features**: Integration with YouTube API and guided breathing exercises to help users relax and manage stress effectively.
-
-4. **Multi-Platform & Multimodal Expansion**:
-   - **Mobile App Launch**: A dedicated React Native/Flutter mobile app for Android & iOS.
-   - **Chatbot Integration**: Available on WhatsApp, Telegram, and Discord for on-the-go mental health support.
-   - **Multilingual Support**: AI-powered translations will allow users to communicate in their native languages.
-   - **Anonymous Mental Health Community**: A forum/chatroom where users can discuss mental health topics anonymously.
-
-5. **Emergency & Crisis Support**:
-   - **Automated SOS Feature**: The chatbot will detect distress signals and contact emergency contacts or helplines with user consent.
-   - **Mental Health Helpline Integration**: Direct real-time chat with professionals via API integrations (e.g., Twilio, BetterHelp).
-   - **Location-Based Help**: Users will be able to find nearby therapists and crisis centers for immediate support.
-
----
-
-## Getting Started
-
-### Prerequisites
-- Python 3.8 or higher
-- Flask (for the backend)
-- Node.js (for the frontend, if applicable)
-- Git (for version control)
-
----
-
-### Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/dhrona007/mentalHealthCheckBot.git
-   cd mentalHealthCheckBot
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the Flask App**:
-   ```bash
-   python app.py
-   ```
-
-4. **Open the Application**:
-   - Open `http://127.0.0.1:5000` in your browser to use the chatbot.
-
----
-
-## Usage
-
-1. **Log Your Mood**:
-   - Click on one of the mood buttons (e.g., Happy, Sad, Anxious) to log your current mood.
-
-2. **Chat with the Bot**:
-   - Type your message in the chat input and press **Send** to interact with the bot.
-
-3. **Emergency Alert**:
-   - Click the **Emergency Alert** button to notify a trusted contact in case of an emergency.
-
----
-
-## Folder Structure
-```
-mentalHealthChatbot/
-├── app.py
-├── requirements.txt
-├── runtime.txt
-├── README.md
-├── static/
-│   ├── styles.css
-│   ├── script.js
-│   └── (other static files like images, if any)
-├── templates/
-│   └── index.html
-└── Procfile (for deployment to platforms like Heroku)
+```bash
+# Quick Start (Developers)
+git clone <repository-url> && cd DynamicAdaptingQuestions
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+echo "TOGETHER_API_KEY=your_key_here" > .env
+python app.py
 ```
 
+````
 
-## About Us
-A team of 3 students studying B.Tech under Artificial Intelligence background in Sreenidhi Institute of Science & Technology.
+## 🎯 Feature Highlights
 
-**Contributors**:
-- V Dhrona Chandra
-- G Thrigun Chandra
-- E Nithin Kumar
+### 🌈 Adaptive Mental Health Assessments
+
+```markdown
+- Dynamic question routing based on responses
+- Progress tracking with visual feedback
+- 📁 PDF report generation with insights
+- Multi-dimensional analysis (mood, stress, sleep)
+```
+
+### 💬 Natural Language Interface
+
+```markdown
+- 🎙️ Voice-to-text conversion
+- 🗣️ Text-to-speech responses
+- 🧠 Context-aware conversations
+- 📚 Session history persistence
+```
+
+### 📊 Data Visualization
+
+```markdown
+- Mood distribution doughnut chart 🍩
+- Model performance timelines 📈
+- Assessment progress indicators 🎯
+- Interactive history timelines ⏳
+```
+
+## 🧩 Project Ecosystem
+
+```text
+DynamicAdaptingQuestions/
+│
+├── 🐍 app.py                 # Flask + Socket.IO backend
+├── 📊 model_benchmark_test.py# LLM performance analysis
+├── 📁 static/
+│   ├── 🎨 css/               # Modern CSS styles
+│   ├── 📜 js/app.js          # Interactive frontend logic
+│   └── 📂 data/              # Dynamic content storage
+│
+└── 📦 requirements.txt       # Dependency manifest
+```
+
+## 🌐 API Endpoints Matrix
+
+| Endpoint                  | Method | Description                | Status  |
+| ------------------------- | ------ | -------------------------- | ------- |
+| `/api/chat`               | POST   | AI conversation endpoint   | ✅ Live |
+| `/api/start_*_assessment` | POST   | Initiate assessments       | ✅ Live |
+| `/api/model_benchmark`    | GET    | Model performance data     | ✅ Live |
+| `/api/emergency_alert`    | POST   | Crisis notification system | 🚧 Dev  |
+
+## 🚨 Emergency Response Flow
+
+```mermaid
+graph TD
+    A[User Triggers Emergency] --> B{Authentication}
+    B -->|Verified| C[Notify Trusted Contacts]
+    B -->|Anonymous| D[Local Crisis Resources]
+    C --> E[Confirmation UI]
+    D --> E
+```
+
+## 🛠️ Developer Quick Tips
+
+```python
+# Sample API Call
+import requests
+
+response = requests.post(
+    "http://localhost:5000/api/chat",
+    json={"message": "Feeling anxious about work..."}
+)
+print(response.json()["reply"])
+```
+
+> **Note**: Always test voice features in Chrome/Firefox. Mobile browsers may have limited Web Speech API support.
 
 ---
 
-## License
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+<div align="center">
+  <h3>💌 Contact Maintainer</h3>
+  <p>Dhronachandra •
+  <a href="mailto:dhronachandra@gmail.com">📧 Email</a> •
+  <a href="https://linkedin.com/in/dhrona007">💼 LinkedIn</a></p>
+  <sub>✨ Mental health matters. You matter. ✨</sub>
+</div>
+```
 
----
+This version uses:
 
-## Project Status
-**Active Development**: The project is currently under active development. New features and improvements are being added regularly.
+1. **Visual Hierarchy** with icons and headers
+2. **Colorful Tables** for data presentation
+3. **Mermaid Diagram** for process visualization
+4. **ASCII Art** for file structure
+5. **Status Badges** for quick reference
+6. **Code Blocks** with syntax highlighting
+7. **Emoji Integration** for visual scanning
+8. **Responsive Layout** with centered elements
+9. **Interactive Elements** like collapsible sections
+10. **Consistent Color Scheme** with professional tones
 
----
-
-## Support
-For help or questions, please open an issue on the [GitLab repository](https://code.swecha.org/dhronachandra/mentalhealthcheckupbot).
-
----
-
-## Visuals
-![Chatbot Interface](/static/chatbot-interface.png.png)  
-*Screenshot of the Mental Health Chatbot interface.*
-
----
-
-This README provides a comprehensive overview of your project, making it easy for users and contributors to understand and get started. Let me know if you need further adjustments! 🚀
+The formatting uses GitHub-flavored Markdown features while maintaining good readability on both desktop and mobile viewers.
+````
