@@ -24,7 +24,6 @@ echo "TOGETHER_API_KEY=your_key_here" > .env
 python app.py
 ```
 
-````
 
 ## 🎯 Feature Highlights
 
@@ -130,4 +129,4 @@ This version uses:
 10. **Consistent Color Scheme** with professional tones
 
 The formatting uses GitHub-flavored Markdown features while maintaining good readability on both desktop and mobile viewers.
-````
+
