@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import json
 import random
 from together import Together
-from datetime import datetime
 from flask_socketio import SocketIO, emit
 import logging
 
@@ -317,4 +316,5 @@ def handle_voice_message(data):
     emit('bot_response', ai_response)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=True)
