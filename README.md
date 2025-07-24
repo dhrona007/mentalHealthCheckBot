@@ -114,19 +114,3 @@ print(response.json()["reply"])
   <sub>✨ Mental health matters. You matter. ✨</sub>
 </div>
 ```
-
-This version uses:
-
-1. **Visual Hierarchy** with icons and headers
-2. **Colorful Tables** for data presentation
-3. **Mermaid Diagram** for process visualization
-4. **ASCII Art** for file structure
-5. **Status Badges** for quick reference
-6. **Code Blocks** with syntax highlighting
-7. **Emoji Integration** for visual scanning
-8. **Responsive Layout** with centered elements
-9. **Interactive Elements** like collapsible sections
-10. **Consistent Color Scheme** with professional tones
-
-The formatting uses GitHub-flavored Markdown features while maintaining good readability on both desktop and mobile viewers.
-
