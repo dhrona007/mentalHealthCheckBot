@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private information about a user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "MoodEntry": {
+      "title": "Mood Entry",
+      "description": "A single mood log entry.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "mood_score": { "type": "integer" },
+        "energy": { "type": "integer" },
+        "anxiety": { "type": "integer" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "journal_text": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "source": { "type": "string" }
+      },
+      "required": ["userId", "mood_score", "timestamp"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "Results of a mental health assessment.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "answers": { "type": "array" },
+        "analysis": { "type": "string" },
+        "type": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "answers", "timestamp"]
+    },
+    "ChatThread": {
+      "title": "Chat Thread",
+      "description": "A conversation history with the AI.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": { "type": "string", "enum": ["user", "assistant"] },
+              "content": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "messages", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user profiles."
+    },
+    "/users/{userId}/mood_entries/{EntryId}": {
+      "schema": "MoodEntry",
+      "description": "Mood logs for a specific user."
+    },
+    "/users/{userId}/assessments/{AssessmentId}": {
+      "schema": "Assessment",
+      "description": "Assessment history for a specific user."
+    },
+    "/users/{userId}/chats/{ChatId}": {
+      "schema": "ChatThread",
+      "description": "Individual chat threads for a user."
+    }
+  }
+}

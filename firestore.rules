@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation Blueprints
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'createdAt']) &&
+             data.keys().size() <= 5 &&
+             data.uid is string && data.uid == request.auth.uid &&
+             data.email is string && data.email.size() > 5 &&
+             data.createdAt is timestamp;
+    }
+
+    function isValidMoodEntry(data) {
+      return data.keys().hasAll(['userId', 'mood_score', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.mood_score is int && data.mood_score >= 1 && data.mood_score <= 10 &&
+             data.timestamp is timestamp &&
+             (!('energy' in data) || (data.energy is int && data.energy >= 1 && data.energy <= 10)) &&
+             (!('anxiety' in data) || (data.anxiety is int && data.anxiety >= 1 && data.anxiety <= 10)) &&
+             (!('tags' in data) || (data.tags is list && data.tags.size() <= 10)) &&
+             (!('journal_text' in data) || (data.journal_text is string && data.journal_text.size() <= 5000));
+    }
+
+    function isValidAssessment(data) {
+      return data.keys().hasAll(['userId', 'answers', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.answers is list && data.answers.size() <= 100 &&
+             data.timestamp is timestamp;
+    }
+
+    function isValidChatThread(data) {
+      return data.keys().hasAll(['userId', 'messages', 'updatedAt']) &&
+             data.userId == request.auth.uid &&
+             data.messages is list && data.messages.size() <= 500 &&
+             data.updatedAt is timestamp;
+    }
+
+    // Collection matches
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && 
+                      isValidUser(incoming()) && 
+                      incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'photoURL']);
+
+      match /mood_entries/{entryId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidMoodEntry(incoming()) && isValidId(entryId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /assessments/{assessmentId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidAssessment(incoming()) && isValidId(assessmentId);
+      }
+
+      match /chats/{chatId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidChatThread(incoming()) && isValidId(chatId);
+        allow update: if isOwner(userId) && 
+                        isValidChatThread(incoming()) && 
+                        incoming().diff(existing()).affectedKeys().hasOnly(['messages', 'updatedAt']);
+      }
+    }
+  }
+}

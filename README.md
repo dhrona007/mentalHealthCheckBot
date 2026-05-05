@@ -1,116 +1,35 @@
-# 🧠 Mentalyze - AI Mental Health Companion [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 <div align="center">
-  <img src="https://img.icons8.com/clouds/200/mental-health.png" width="150" alt="Mentalyze Logo">
-  <h3>Your 24/7 AI-powered mental wellness partner</h3>
-  <p>Empowering emotional well-being through adaptive AI conversations and mood insights 🌈</p>
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-## ✨ Key Features
+# Run and deploy your AI Studio app
 
-| Feature Category       | Components                                                      | Icon |
-| ---------------------- | --------------------------------------------------------------- | ---- |
-| **🤖 AI Interactions** | Voice & text chat • Context-aware responses • Multi-LLM support | 💬   |
-| **📊 Mental Insights** | Adaptive assessments • Mood tracking • PDF report generation    | 📈   |
-| **⚡ Performance**     | Model benchmarking • Real-time analytics • Session persistence  | 🚀   |
-| **🔒 Safety**          | Emergency alerts • Privacy-first design • Anonymous usage       | 🛡️   |
+This contains everything you need to run your app locally.
 
-```bash
-# Quick Start (Developers)
-git clone <repository-url> && cd DynamicAdaptingQuestions
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-echo "TOGETHER_API_KEY=your_key_here" > .env
-python app.py
-```
+View your app in AI Studio: https://ai.studio/apps/28dff06a-763e-4a7f-ab9d-8c980b789ec9
 
+## Run Locally
 
-## 🎯 Feature Highlights
+**Prerequisites:** Node.js
 
-### 🌈 Adaptive Mental Health Assessments
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
 
-```markdown
-- Dynamic question routing based on responses
-- Progress tracking with visual feedback
-- 📁 PDF report generation with insights
-- Multi-dimensional analysis (mood, stress, sleep)
-```
+## Deploy to Render
 
-### 💬 Natural Language Interface
+This app can be deployed as a static site on Render.
 
-```markdown
-- 🎙️ Voice-to-text conversion
-- 🗣️ Text-to-speech responses
-- 🧠 Context-aware conversations
-- 📚 Session history persistence
-```
-
-### 📊 Data Visualization
-
-```markdown
-- Mood distribution doughnut chart 🍩
-- Model performance timelines 📈
-- Assessment progress indicators 🎯
-- Interactive history timelines ⏳
-```
-
-## 🧩 Project Ecosystem
-
-```text
-DynamicAdaptingQuestions/
-│
-├── 🐍 app.py                 # Flask + Socket.IO backend
-├── 📊 model_benchmark_test.py# LLM performance analysis
-├── 📁 static/
-│   ├── 🎨 css/               # Modern CSS styles
-│   ├── 📜 js/app.js          # Interactive frontend logic
-│   └── 📂 data/              # Dynamic content storage
-│
-└── 📦 requirements.txt       # Dependency manifest
-```
-
-## 🌐 API Endpoints Matrix
-
-| Endpoint                  | Method | Description                | Status  |
-| ------------------------- | ------ | -------------------------- | ------- |
-| `/api/chat`               | POST   | AI conversation endpoint   | ✅ Live |
-| `/api/start_*_assessment` | POST   | Initiate assessments       | ✅ Live |
-| `/api/model_benchmark`    | GET    | Model performance data     | ✅ Live |
-| `/api/emergency_alert`    | POST   | Crisis notification system | 🚧 Dev  |
-
-## 🚨 Emergency Response Flow
-
-```mermaid
-graph TD
-    A[User Triggers Emergency] --> B{Authentication}
-    B -->|Verified| C[Notify Trusted Contacts]
-    B -->|Anonymous| D[Local Crisis Resources]
-    C --> E[Confirmation UI]
-    D --> E
-```
-
-## 🛠️ Developer Quick Tips
-
-```python
-# Sample API Call
-import requests
-
-response = requests.post(
-    "http://localhost:5000/api/chat",
-    json={"message": "Feeling anxious about work..."}
-)
-print(response.json()["reply"])
-```
-
-> **Note**: Always test voice features in Chrome/Firefox. Mobile browsers may have limited Web Speech API support.
-
----
-
-<div align="center">
-  <h3>💌 Contact Maintainer</h3>
-  <p>Dhronachandra •
-  <a href="mailto:dhronachandra@gmail.com">📧 Email</a> •
-  <a href="https://linkedin.com/in/dhrona007">💼 LinkedIn</a></p>
-  <sub>✨ Mental health matters. You matter. ✨</sub>
-</div>
-```
+1. Push your code to a Git repository (e.g., GitHub, GitLab).
+2. Sign up for a Render account at https://render.com.
+3. Connect your repository to Render.
+4. Create a new Static Site service.
+5. Set the build command to: `npm run build`
+6. Set the publish directory to: `dist`
+7. In the Environment section, add the following environment variables:
+   - `GEMINI_API_KEY`: Your Gemini API key
+   - `APP_URL`: The URL of your deployed app (e.g., https://your-app-name.onrender.com)
+8. Deploy the service.
+9. In your Firebase console, add the Render domain to the authorized domains for Authentication (under Authentication > Sign-in method > Authorized domains).
