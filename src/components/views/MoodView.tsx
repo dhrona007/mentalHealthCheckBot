@@ -5,12 +5,10 @@ import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, limit 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
 import { Heart, Activity, Wind, Save, PlusCircle, Brain } from 'lucide-react';
 import { format } from 'date-fns';
-import { GoogleGenAI } from '@google/genai';
 import ReactMarkdown from 'react-markdown';
 import { cn } from '../../lib/utils';
 import { MoodEntry } from '../../types';
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+import { formatAiError, generateGeminiText, isGeminiConfigured } from '../../lib/ai';
 
 interface SliderFieldProps {
   icon: React.ReactNode;
@@ -52,6 +50,7 @@ export const MoodView = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [aiInsights, setAiInsights] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [aiError, setAiError] = useState('');
 
   useEffect(() => {
     if (!user) return;
@@ -99,6 +98,7 @@ export const MoodView = () => {
   const getAiInsights = async () => {
     if (!user || history.length === 0) return;
     setIsAnalyzing(true);
+    setAiError('');
     try {
       const moodSummary = history.slice(0, 10).map(e => ({
         score: e.mood_score,
@@ -106,14 +106,14 @@ export const MoodView = () => {
         date: e.timestamp?.toDate ? format(e.timestamp.toDate(), 'MMM d') : 'unknown'
       }));
 
-      const result = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: `Analyze this user's recent mood history and provide empathetic insights and small self-care tips:
-        ${moodSummary.map(m => `Date: ${m.date}, Score: ${m.score}, Journal: ${m.text}`).join('\n')}`
-      });
-      setAiInsights(result.text || "No insights available at the moment.");
+      const text = await generateGeminiText(
+        `Analyze this user's recent mood history and provide empathetic insights and small self-care tips:
+        ${moodSummary.map(m => `Date: ${m.date}, Score: ${m.score}, Journal: ${m.text}`).join('\n')}`,
+      );
+      setAiInsights(text || "No insights available at the moment.");
     } catch (error) {
       console.error("AI Insights error", error);
+      setAiError(formatAiError(error));
     } finally {
       setIsAnalyzing(false);
     }
@@ -159,7 +159,7 @@ export const MoodView = () => {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 text-center bg-white dark:bg-slate-800 rounded-3xl shadow-xl">
+      <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-white dark:bg-slate-800 rounded-3xl shadow-xl">
         <Heart className="w-16 h-16 text-rose-500 mb-6 opacity-20" />
         <h3 className="text-xl font-bold mb-2">Please login to track your mood</h3>
         <p className="text-slate-500">Log your feelings daily and discover patterns over time.</p>
@@ -168,12 +168,12 @@ export const MoodView = () => {
   }
 
   return (
-    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-xl border border-teal-700/5">
-            <h3 className="text-2xl font-bold font-['Sora'] mb-8">Mood Timeline</h3>
-            <div className="h-72 w-full">
+    <div className="space-y-8 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="lg:col-span-2 space-y-6 sm:space-y-8 min-w-0">
+          <div className="bg-white dark:bg-slate-800 p-5 sm:p-8 rounded-3xl lg:rounded-[2rem] shadow-xl border border-teal-700/5">
+            <h3 className="text-xl sm:text-2xl font-bold font-['Sora'] mb-6 sm:mb-8">Mood Timeline</h3>
+            <div className="h-64 sm:h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
@@ -196,8 +196,8 @@ export const MoodView = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-lg border border-teal-700/5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+            <div className="bg-white dark:bg-slate-800 p-5 sm:p-6 rounded-3xl shadow-lg border border-teal-700/5 min-w-0">
               <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Weekday Average</h4>
               <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
@@ -214,7 +214,7 @@ export const MoodView = () => {
               </div>
             </div>
             
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-lg border border-teal-700/5">
+            <div className="bg-white dark:bg-slate-800 p-5 sm:p-6 rounded-3xl shadow-lg border border-teal-700/5 min-w-0">
               <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Entry Sources</h4>
               <div className="space-y-3">
                 {sourceData.map((s, i) => (
@@ -233,9 +233,9 @@ export const MoodView = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-xl border border-teal-700/5">
-                <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold font-['Sora'] flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-800 p-5 sm:p-8 rounded-3xl lg:rounded-[2rem] shadow-xl border border-teal-700/5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                    <h3 className="text-lg sm:text-xl font-bold font-['Sora'] flex items-center gap-2">
                         <Brain className="text-teal-700 w-6 h-6" /> AI Reflective Insights
                     </h3>
                     <button 
@@ -247,9 +247,17 @@ export const MoodView = () => {
                     </button>
                 </div>
                 {aiInsights ? (
-                    <div className="prose prose-sm dark:prose-invert max-w-none bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-teal-700/10">
+                    <div className="prose prose-sm dark:prose-invert max-w-none bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border border-teal-700/10">
                         <ReactMarkdown>{aiInsights}</ReactMarkdown>
                     </div>
+                ) : aiError ? (
+                    <p className="text-rose-600 dark:text-rose-300 bg-rose-50 dark:bg-rose-900/20 border border-rose-500/20 rounded-2xl p-4 text-sm">
+                        {aiError}
+                    </p>
+                ) : !isGeminiConfigured() ? (
+                    <p className="text-amber-700 dark:text-amber-200 bg-amber-50 dark:bg-amber-900/20 border border-amber-500/20 rounded-2xl p-4 text-sm">
+                        Gemini is not configured. Add <strong>VITE_GEMINI_API_KEY</strong> to a local .env file and restart the dev server.
+                    </p>
                 ) : (
                     <p className="text-slate-400 italic text-center py-8">
                         {history.length > 0 ? "Click 'Refresh Insights' to get AI-powered feedback on your recent mood logs." : "Log a few entries to enable AI insights."}
@@ -258,9 +266,9 @@ export const MoodView = () => {
           </div>
         </div>
 
-        <div className="space-y-8">
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-xl border border-teal-700/5">
-            <h3 className="text-xl font-bold font-['Sora'] mb-6 flex items-center gap-2">
+        <div className="space-y-6 sm:space-y-8 min-w-0">
+          <div className="bg-white dark:bg-slate-800 p-5 sm:p-8 rounded-3xl lg:rounded-[2rem] shadow-xl border border-teal-700/5">
+            <h3 className="text-lg sm:text-xl font-bold font-['Sora'] mb-6 flex items-center gap-2">
               <PlusCircle className="text-teal-700" /> Log Check-in
             </h3>
             
@@ -309,8 +317,8 @@ export const MoodView = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-xl border border-teal-700/5">
-            <h3 className="text-xl font-bold font-['Sora'] mb-6">Recent Logs</h3>
+          <div className="bg-white dark:bg-slate-800 p-5 sm:p-8 rounded-3xl lg:rounded-[2rem] shadow-xl border border-teal-700/5">
+            <h3 className="text-lg sm:text-xl font-bold font-['Sora'] mb-6">Recent Logs</h3>
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
               {history.map((entry, i) => (
                 <div key={i} className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-700">
